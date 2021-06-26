@@ -10,6 +10,7 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { Link } from 'react-router-dom';
 
 class Details extends Component {
 
@@ -51,13 +52,11 @@ class Details extends Component {
     componentWillMount(){
         let currentState = this.state;
         currentState.movie = moviesData.filter((mov)=> {
-            return mov.id === this.props.movieId
+            return mov.id === this.props.match.params.id
         })[0];
         this.setState({currentState});
     }
-    backtohomeHandler = () => {
-        ReactDOM.render(<Home />, document.getElementById('root'));
-    }
+    
     artistClickHandler = (url) => {
         window.location = url;
     }
@@ -89,11 +88,11 @@ class Details extends Component {
         
         return (
         <div className="details">
-            <Header showBookShowButton = "true"/>
+            <Header id={this.props.match.params.id} showBookShowButton="true" />
             <div className="back">
-                <Typography onClick={this.backtohomeHandler}>
-                    &#60; Back to Home
-                </Typography>
+            <Typography>
+                        <Link to="/">  &#60; Back to Home</Link>
+                    </Typography>
             </div>
             <div className="flex-containerDetails">
                 <div className="leftDetails">

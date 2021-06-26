@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+
 import './Home.css';
-import Details from '../../screens/details/Details'
+
 import Header from '../../common/header/Header.js'
 import { withStyles } from '@material-ui/core/styles';
 import moviesData from '../../common/movieData.js';
@@ -78,10 +78,7 @@ class Home extends Component {
     }
 
     movieClickHandler = (movieId) => {
-        ReactDOM.render(
-            <Details movieId={movieId}/>,
-            document.getElementById('root')
-          );
+        this.props.history.push('/movie/' + movieId);
     }
 
     render() {
@@ -134,7 +131,7 @@ class Home extends Component {
                             renderValue={selected => selected.join(',')}       
                             value={this.state.genres}
                             onChange={this.genreSelectHandler}>
-                                <MenuItem value="0"> None </MenuItem>
+                                
                                 {genres.map(genre => (
                                     <MenuItem key={genre.id} value = {genre.name}>
                                     <Checkbox checked={this.state.genres.indexOf(genre.name) > -1} />
@@ -152,7 +149,7 @@ class Home extends Component {
                                         value={this.state.artists}
                                         onChange={this.artistSelectHandler}
                                     >
-                                        <MenuItem value="0">None</MenuItem>
+                                        
                                         {artists.map(artist => (
                                             <MenuItem key={artist.id} value={artist.first_name + " " + artist.last_name}>
                                                 <Checkbox checked={this.state.artists.indexOf(artist.first_name + " " + artist.last_name) > -1} />
